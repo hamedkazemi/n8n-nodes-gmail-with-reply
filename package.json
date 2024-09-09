@@ -1,19 +1,19 @@
 {
-  "name": "n8n-nodes-<...>",
-  "version": "0.1.0",
-  "description": "",
+  "name": "n8n-nodes-gmail-with-reply",
+  "version": "0.3.4",
+  "description": "Just a modified version of original gmail based node with reply functionality",
   "keywords": [
     "n8n-community-node-package"
   ],
   "license": "MIT",
   "homepage": "",
   "author": {
-    "name": "",
-    "email": ""
+    "name": "hamedkazemi",
+    "email": "kafa1942@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/<...>/n8n-nodes-<...>.git"
+    "url": "https://github.com/hamedkazemi/n8n-nodes-gmail-with-reply/"
   },
   "engines": {
     "node": ">=18.10",
@@ -36,15 +36,18 @@
   "n8n": {
     "n8nNodesApiVersion": 1,
     "credentials": [
-      "dist/credentials/ExampleCredentialsApi.credentials.js",
-      "dist/credentials/HttpBinApi.credentials.js"
+      "dist/credentials/GoogleOAuth2Api.credentials.js"
     ],
     "nodes": [
-      "dist/nodes/ExampleNode/ExampleNode.node.js",
-      "dist/nodes/HttpBin/HttpBin.node.js"
+      "dist/nodes/GmailV3/GmailV3.node.ts"
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.7",
+    "@types/jsonwebtoken": "^9.0.6",
+    "@types/luxon": "^3.4.2",
+    "@types/mailparser": "^3.4.4",
+    "@types/nodemailer": "^6.4.15",
     "@typescript-eslint/parser": "^7.15.0",
     "eslint": "^8.56.0",
     "eslint-plugin-n8n-nodes-base": "^1.16.1",
@@ -54,6 +57,16 @@
     "typescript": "^5.5.3"
   },
   "peerDependencies": {
+    "n8n-nodes-base": "*",
     "n8n-workflow": "*"
+  },
+  "dependencies": {
+    "jsonwebtoken": "^9.0.2",
+    "lodash": "^4.17.21",
+    "luxon": "^3.5.0",
+    "mailparser": "^3.7.1",
+    "moment-timezone": "^0.5.45",
+    "nodemailer": "^6.9.15",
+    "tslint": "^5.20.1"
   }
 }
