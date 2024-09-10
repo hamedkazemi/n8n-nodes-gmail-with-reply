@@ -206,6 +206,13 @@ export const threadFields: INodeProperties[] = [
 				default: false,
 				description: 'Whether to reply to the sender only or to the entire list of recipients',
 			},
+			{
+				displayName: 'Reply to Recipient Only',
+				name: 'replyToRecipientOnly',
+				type: 'boolean',
+				default: true,
+				description: 'Whether to reply to the Recipient only',
+			},
 		],
 	},
 	/* -------------------------------------------------------------------------- */

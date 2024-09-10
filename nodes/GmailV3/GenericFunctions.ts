@@ -596,6 +596,9 @@ export async function replyToEmail(
 	const replyToSenderOnly =
 		options.replyToSenderOnly === undefined ? false : (options.replyToSenderOnly as boolean);
 
+	const replyToRecipientOnly =
+		options.replyToRecipientOnly === undefined ? false : (options.replyToRecipientOnly as boolean);
+
 	const prepareEmailString = (email: string) => {
 		if (email.includes(emailAddress as string)) return;
 		if (email.includes('<') && email.includes('>')) {
@@ -606,7 +609,10 @@ export async function replyToEmail(
 	};
 
 	for (const header of payload.headers as IDataObject[]) {
-		if (((header.name as string) || '').toLowerCase() === 'from') {
+		const headerName = ((header.name as string) || '').toLowerCase();
+
+		if (headerName === 'from' && !replyToRecipientOnly) {
+			// Add sender to 'to' field if `replyToRecipientOnly` is NOT enabled
 			const from = header.value as string;
 			if (from.includes('<') && from.includes('>')) {
 				to += `${from}, `;
@@ -615,7 +621,8 @@ export async function replyToEmail(
 			}
 		}
 
-		if (((header.name as string) || '').toLowerCase() === 'to' && !replyToSenderOnly) {
+		if (headerName === 'to' && !replyToSenderOnly) {
+			// Add recipients to 'to' field if `replyToSenderOnly` is NOT enabled
 			const toEmails = header.value as string;
 			toEmails.split(',').forEach(prepareEmailString);
 		}
